@@ -23,16 +23,10 @@ const port = 3000;
 app.use(express.json());
 const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(",") : [];
 app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests from allowed origins or no origin (for non-browser requests)
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true); // Allow the request
-        }
-        else {
-            callback(new Error('Not allowed by CORS')); // Reject the request
-        }
+    origin: (origin, callback) => {
+        callback(null, origin || '*');
     },
-    credentials: true, // Allow sending cookies
+    credentials: true,
 }));
 //middleware for passport
 app.use(session({ secret: "cats",
