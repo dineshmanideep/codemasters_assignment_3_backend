@@ -1,8 +1,9 @@
 
 import { client, createUser,createPost, getPost, getPosts } from "./drizzle/db"
-import "../src/drizzle/authmiddleware.ts"
+import "./drizzle/authmiddleware"
 import { updatePost } from "./drizzle/db";
 import { Request, Response } from 'express';
+require('dotenv').config();
 
 const express = require('express')
 const cors = require('cors')
@@ -13,12 +14,12 @@ const Local = require('passport-local').Strategy;
 const app = express()
 const port = 3000
 
-
+const allowedOrigins = process.env.FRONTEND_URL || "*";
 //middleware
 //use json parser
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your frontend URL
+    origin:allowedOrigins, // Replace with your frontend URL
     credentials: true, // Allow sending cookies
   }));
 

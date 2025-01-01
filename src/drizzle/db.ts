@@ -5,16 +5,16 @@ import { Client } from "pg";
 import * as schema from "./schema"
 import { eq } from "drizzle-orm";
 
+require("dotenv").config()
+const DATABASE = process.env.DATABASE_URL
 
 const bcrypt = require("bcrypt");
 
 
 
 export const client = new Client({
-    connectionString: 'postgresql://neondb_owner:32moOQXzpGNY@ep-lively-cloud-a5hc1x9o.us-east-2.aws.neon.tech/neondb?sslmode=require',
-    ssl: {
-        rejectUnauthorized: false
-    }
+    connectionString: DATABASE,
+    
 });
 
 client.connect()
