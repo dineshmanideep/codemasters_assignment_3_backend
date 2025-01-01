@@ -19,14 +19,15 @@ const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split
 
 app.use(cors({
   origin: function (origin:string, callback:Function) {
-    // Allow requests from allowed origins or no origin (for non-browser requests)
+    // If the origin is undefined (in case of non-browser requests) or it matches the allowed list
     if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true); // Allow the request
-    } else {
-      callback(new Error('Not allowed by CORS')); // Reject the request
-    }
-  },
-  credentials: true, // Allow sending cookies
+        callback(null, true); // Allow the request
+      } else {
+        console.log("Blocked origin:", origin);  // Add logging to check which origin is blocked
+        callback(new Error('Not allowed by CORS')); // Reject the request
+      }
+    },
+    credentials: true, // Allow sending cookies
 }));
 
 
