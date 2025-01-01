@@ -14,14 +14,20 @@ const Local = require('passport-local').Strategy;
 const app = express()
 const port = 3000
 
-const allowedOrigins = process.env.FRONTEND_URL || "*";
-//middleware
-//use json parser
 app.use(express.json())
+const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(",") : [];
+
 app.use(cors({
-    origin:allowedOrigins, // Replace with your frontend URL
-    credentials: true, // Allow sending cookies
-  }));
+  origin: function (origin:string, callback:Function) {
+    // Allow requests from allowed origins or no origin (for non-browser requests)
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Reject the request
+    }
+  },
+  credentials: true, // Allow sending cookies
+}));
 
 
 //middleware for passport

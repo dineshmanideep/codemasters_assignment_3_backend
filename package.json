@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "prestart": "npm install",
-  "build": "tsc",
-  "start": "node dist/index.js",
-  "dev": "tsx watch src/index.ts",
-  "stage": "tsc && git status && git add ."
-}
-,
+    "prestart": "npm install",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "stage": "tsc && git status && git add ."
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
