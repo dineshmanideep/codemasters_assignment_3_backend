@@ -15,15 +15,14 @@ const app = express()
 const port = 3000
 
 app.use(express.json())
-const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(",") : [];
 
-app.use(cors({
-    origin: (origin: string, callback: Function) => {
-      
-      callback(null, origin || '*');
-    },
-    credentials: true, 
-  }));
+
+app.use(
+    cors({
+     
+      credentials: true, 
+    })
+  );
 
 //middleware for passport
 app.use(session({ secret: "cats",
