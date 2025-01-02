@@ -29,10 +29,13 @@ passport.use(new LocalStrategy({ usernameField: "username" },async (username:str
         console.log("username", username, "password", password);
         const rows = await db.select().from(schema.users).where(eq(schema.users.username, username));
         const user = rows[0];
-        const match = await bcrypt.compare(password, user.password);
+
         if (!user) {
             return done(null, false, { message: "Incorrect username" });
         }
+
+        const match = await bcrypt.compare(password, user.password);
+        
         if (!match) {
             return done(null, false, { message: "Incorrect password" })
         }

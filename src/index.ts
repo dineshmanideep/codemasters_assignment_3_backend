@@ -19,7 +19,7 @@ app.use(express.json())
 
 app.use(
     cors({
-      origin:"https://codemasters-assignment-3-frontend.vercel.app/",
+      origin:"https://codemasters-assignment-3-frontend.vercel.app",
       credentials: true, 
     })
   );
@@ -30,6 +30,7 @@ app.use(session({ secret: "cats",
     saveUninitialized: false,
     cookie: { 
         maxAge: 24 * 60 * 60 * 1000,
+        secure:true,
         sameSite: 'none' 
     
     },
