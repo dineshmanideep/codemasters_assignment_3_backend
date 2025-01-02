@@ -30,8 +30,8 @@ app.use(session({ secret: "cats",
     saveUninitialized: false,
     cookie: { 
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: 'none', 
-        secure: process.env.NODE_ENV === "production"
+        sameSite: 'none' 
+    
     },
     }));
 app.use(passport.session());
