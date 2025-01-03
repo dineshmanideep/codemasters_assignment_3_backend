@@ -21,11 +21,8 @@ const Local = require('passport-local').Strategy;
 const app = express();
 const port = 3000;
 app.use(express.json());
-const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(",") : [];
 app.use(cors({
-    origin: (origin, callback) => {
-        callback(null, origin || '*');
-    },
+    origin: "https://codemasters-assignment-3-frontend.vercel.app",
     credentials: true,
 }));
 //middleware for passport
@@ -34,7 +31,8 @@ app.use(session({ secret: "cats",
     saveUninitialized: false,
     cookie: {
         maxAge: 24 * 60 * 60 * 1000,
-        secure: false
+        secure: true,
+        sameSite: 'none'
     },
 }));
 app.use(passport.session());

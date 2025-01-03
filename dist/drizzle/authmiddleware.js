@@ -66,10 +66,10 @@ passport.use(new LocalStrategy({ usernameField: "username" }, (username, passwor
         console.log("username", username, "password", password);
         const rows = yield db_1.db.select().from(schema.users).where((0, drizzle_orm_1.eq)(schema.users.username, username));
         const user = rows[0];
-        const match = yield bcrypt.compare(password, user.password);
         if (!user) {
             return done(null, false, { message: "Incorrect username" });
         }
+        const match = yield bcrypt.compare(password, user.password);
         if (!match) {
             return done(null, false, { message: "Incorrect password" });
         }
