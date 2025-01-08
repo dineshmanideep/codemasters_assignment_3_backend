@@ -21,8 +21,10 @@ app.use(
     cors({
       origin:"https://codemasters-assignment-3-frontend.vercel.app",
       credentials: true, 
-    })
-  );
+       methods: 'GET, POST, PUT, DELETE',
+      allowedHeaders: 'Content-Type, Authorization'
+    })
+  );
 
 //middleware for passport
 app.use(session({ secret: "cats",
